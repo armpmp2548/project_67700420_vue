@@ -17,6 +17,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/customer">Customer</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Add_customer">Add_Customer</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -25,7 +28,7 @@
             <li><a class="dropdown-item" href="#">login</a></li>
             <li><a class="dropdown-item" href="#">logout</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Register</a></li>
+            <li><a class="dropdown-item" href="/Add_customer">Register</a></li>
           </ul>
         </li>
        <li class="nav-item">
