@@ -23,6 +23,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/Add_customer">Add_Customer</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Student">Student</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Add_student">Add_student</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
