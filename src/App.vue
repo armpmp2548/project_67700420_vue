@@ -17,18 +17,23 @@
         <li class="nav-item">
           <a class="nav-link" href="/products">Product</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/customer">Customer</a>
-        </li>
+      
         <li class="nav-item">
           <a class="nav-link" href="/Add_customer">Add_Customer</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/Student">Student</a>
+    
+ <li class="nav-item">
+          <a class="nav-link" href="/student_edit">Student Edit</a>
         </li>
+
+
         <li class="nav-item">
           <a class="nav-link" href="/Add_student">Add_student</a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/customer_edit">Customer</a>
+        </li>
+      
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -40,6 +45,18 @@
             <li><a class="dropdown-item" href="/Add_customer">Register</a></li>
           </ul>
         </li>
+
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Customer
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Customer</a></li>
+            <li><a class="dropdown-item" href="/customer_edit">Customer edit</a></li>
+            <li><hr class="dropdown-divider"></li>
+          </ul>
+        </li>
+
        <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
         </li>

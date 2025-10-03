@@ -9,7 +9,7 @@ try {
 
     if ($method === "GET") {
         // ✅ ดึงข้อมูลลูกค้าทั้งหมด
-        $stmt = $conn->prepare("SELECT student_id, firstName, lastName,phone,username FROM customers ORDER BY student_id ASC");
+        $stmt = $conn->prepare("SELECT customer_id, firstName, lastName,phone,username FROM customers ORDER BY customer_id ASC");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -18,11 +18,11 @@ try {
 
     // ✅ เพิ่มข้อมูล
     elseif ($method === "POST") {
-        $data = json_decode(file_get_students("php://input"), true);
+        $data = json_decode(file_get_contents("php://input"), true);
 
         $password_01  = password_hash($data["password"], PASSWORD_BCRYPT);
 
-        $stmt = $conn->prepare("INSERT INTO students (firstName, lastName, phone, username, password) 
+        $stmt = $conn->prepare("INSERT INTO customers (firstName, lastName, phone, username, password) 
                                 VALUES (:firstName, :lastName, :phone, :username, :password)");
 
         $stmt->bindParam(":firstName", $data["firstName"]);
@@ -43,25 +43,25 @@ try {
 elseif ($method === "PUT") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if (!isset($data["student_id"])) {
-        echo json_encode(["success" => false, "message" => "ไม่พบค่า student_id"]);
+    if (!isset($data["customer_id"])) {
+        echo json_encode(["success" => false, "message" => "ไม่พบค่า customer_id"]);
         exit;
     }
 
-    $customer_id = intval($data["student_id"]);
+    $customer_id = intval($data["customer_id"]);
 
     // ตรวจสอบว่ามีการส่ง password มาไหม
     if (!empty($data["password"])) {
         // เข้ารหัสรหัสผ่านใหม่
         $password_01 = password_hash($data["password"], PASSWORD_BCRYPT);
 
-        $stmt = $conn->prepare("UPDATE students 
+        $stmt = $conn->prepare("UPDATE customers 
                                 SET firstName = :firstName, 
                                     lastName = :lastName, 
                                     phone = :phone, 
                                     username = :username,
                                     password = :password
-                                WHERE student_id = :id");
+                                WHERE customer_id = :id");
 
         $stmt->bindParam(":firstName", $data["firstName"]);
         $stmt->bindParam(":lastName", $data["lastName"]);
@@ -72,7 +72,7 @@ elseif ($method === "PUT") {
 
     } else {
         // กรณีไม่ได้แก้ไข password
-        $stmt = $conn->prepare("UPDATE students 
+        $stmt = $conn->prepare("UPDATE customers 
                                 SET firstName = :firstName, 
                                     lastName = :lastName, 
                                     phone = :phone, 
@@ -97,14 +97,14 @@ elseif ($method === "PUT") {
     elseif ($method === "DELETE") {
         $data = json_decode(file_get_contents("php://input"), true);
 
-        if (!isset($data["student_id"])) {
+        if (!isset($data["customer_id"])) {
             echo json_encode(["success" => false, "message" => "ไม่พบค่า customer_id"]);
             exit;
         }
 
-        $customer_id = intval($data["student_id"]);
+        $customer_id = intval($data["customer_id"]);
 
-        $stmt = $conn->prepare("DELETE FROM students WHERE student_id = :id");
+        $stmt = $conn->prepare("DELETE FROM customers WHERE customer_id = :id");
         $stmt->bindParam(":id", $customer_id, PDO::PARAM_INT);
 
         if ($stmt->execute()) {

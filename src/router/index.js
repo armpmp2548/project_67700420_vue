@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import add_customer from '../views/Add_customer.vue'
 import add_product from '../views/Add_product.vue'
 import add_student from '../views/Add_student.vue'
-import Student from '../views/Student.vue'
+import customer_edit from '../views/customer_edit.vue'
+
 
 
 
@@ -17,9 +18,6 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import('../views/AboutView.vue')
   },
   {
@@ -47,16 +45,23 @@ const routes = [
     name: 'Add_product',
     component: add_product
   },
-  {
-    path: '/Student',
-    name: 'Student',
-    component: Student
-  },
+
   {
     path: '/Add_Student',
     name: 'Add_Student',
     component: add_student
   },
+  {
+    path: '/customer_edit',
+    name: 'customer_edit',
+    component: customer_edit
+  },
+  {
+    path: '/student_edit',
+    name: 'student_edit',
+    component: () => import('../views/Student_edit.vue')
+  }
+  
 ]
 
 const router = createRouter({
