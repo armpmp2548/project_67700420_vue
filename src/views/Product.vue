@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-4">
-      <h2 class="mb-3">รายชื่อลูกค้า</h2>
+      <h2 class="mb-3">เพิ่มสินค้าใหม่</h2>
       
       <div class="mb-3">
         <a class="btn btn-primary" href="/add_product" role="button">Add+</a>
@@ -31,7 +31,7 @@
             width="70%"
             height="300"
             class="card-img-top"
-            :alt="product.name"
+            :alt="product_name"
           >
           </td>
           </tr>

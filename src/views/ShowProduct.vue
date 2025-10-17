@@ -2,12 +2,20 @@
   <div class="container my-5">
     <h2 class="text-center mb-4">รายการสินค้า</h2>
     <div class="row">
-      <div class="col-md-4" v-for="product in products" :key="product.id">
+      <div class="col-md-4" v-for="product in products" :key="product_id">
+
+
+
         <div class="card shadow-sm mb-4">
-          <img :src="product.image" class="card-img-top" :alt="product.name">
+          <img :src="'http://localhost:8081/project_67700420_vue/api_php/uploads/' + product.image" width="70%" height="300" 
+           class="card-img-top" :alt="product.name">
           <div class="card-body text-center">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">{{ product.price }} บาท</p>
+
+
+
+
+            <h5 class="card-title">{{ product.product_name }}</h5>
+            <p class="card-text">ราคา {{ product.price }} บาท [คงเหลือ {{ product.stock }}] </p> 
             <button class="btn btn-primary">รายละเอียด</button>
           </div>
         </div>
@@ -17,19 +25,52 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+
 export default {
-  name: "ShowProduct",
-  data() {
+  name: "ProductList",
+  setup() {
+    const products = ref([]);
+    const loading = ref(true);
+    const error = ref(null);
+
+    // ฟังก์ชันดึงข้อมูลจาก API ด้วย GET
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:8081/project_67700420_vue/api_php/show_product.php", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("ไม่สามารถดึงข้อมูลได้");
+        }
+
+        const result = await response.json();
+        if (result.success) {
+          products.value = result.data;
+        } else {
+          error.value = result.message;
+        }
+
+      } catch (err) {
+        error.value = err.message;
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    onMounted(() => {
+      fetchProducts();
+    });
+
     return {
-      products: [
-        { id: 1, name: "เตาไฟฟ้า", price: 1200, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwaT_gNNgPvXQPUszhjyGnp6x5SrTIyGM4gg&s" },
-        { id: 2, name: "หม้อชาบู", price: 990, image: "https://backend.sinthanee.com/uploads/products/NewFolder/33.png" },
-        { id: 3, name: "ชุดช้อนส้อม", price: 250, image: "https://www.verasu.com/media/catalog/product/cache/9fe915041f3f0fb5ee2faedd41ee1b2f/a/m/ame-austin24_01_02.jpg" },
-        { id: 1, name: "กระจก", price: 400, image: "https://img.lazcdn.com/g/p/659c08bb6680ef77dcdccfe6c32b1607.jpg_720x720q80.jpg" },
-        { id: 2, name: "พัดลม", price: 800, image: "https://kashiwa.co.th/wp-content/uploads/2025/03/FS-2201.webp" },
-        { id: 3, name: "ตู้เสื้อผ้า", price: 2500, image: "https://www.iconic-office.com/wp-content/uploads/2017/12/GreyBG-WS-C2-2.png" }
-      ]
-    }
+      products,
+      loading,
+      error
+    };
   }
-}
+};
 </script>

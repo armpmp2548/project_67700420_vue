@@ -4,6 +4,8 @@ import add_customer from '../views/Add_customer.vue'
 import add_product from '../views/Add_product.vue'
 import add_student from '../views/Add_student.vue'
 import customer_edit from '../views/customer_edit.vue'
+import employee from '../views/employee.vue'
+
 
 
 
@@ -55,6 +57,11 @@ const routes = [
     path: '/customer_edit',
     name: 'customer_edit',
     component: customer_edit
+  },
+  {
+    path: '/employee',
+    name: 'employee',
+    component: employee
   },
   {
     path: '/student_edit',
