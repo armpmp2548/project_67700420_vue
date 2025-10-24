@@ -35,7 +35,7 @@
         </li>
       
        <li class="nav-item">
-          <a class="nav-link" href="/employee">Employee</a>
+          <a class="nav-link" href="/employee">Employees</a>
         </li>
 
         <li class="nav-item dropdown">
